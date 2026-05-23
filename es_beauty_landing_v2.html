@@ -1,0 +1,941 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ES Beauty Clinic — Лазерная эпиляция всего тела</title>
+
+<!-- =====================================================
+     ЯНДЕКС МЕТРИКА
+     Замените XXXXXXXX на ваш номер счётчика
+     Найти: Метрика → Настройки → Номер счётчика
+====================================================== -->
+<script type="text/javascript">
+   (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+   m[i].l=1*new Date();
+   for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+   k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+   (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+   ym(XXXXXXXX, "init", {
+        clickmap: true,
+        trackLinks: true,
+        accurateTrackBounce: true,
+        webvisor: true,
+        ecommerce: false
+   });
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/XXXXXXXX" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+
+<!-- =====================================================
+     ВК ПИКСЕЛЬ
+     Замените YYYYYYYYYYYY на ваш ID пикселя
+     Найти: VK Реклама → Пиксели → ID пикселя
+====================================================== -->
+<script type="text/javascript">
+  !function(){var t=document.createElement("script");t.type="text/javascript",t.async=!0,t.src='https://vk.com/js/api/openapi.js?169',t.onload=function(){VK.Retargeting.Init("YYYYYYYYYYYY"),VK.Retargeting.Hit()},document.head.appendChild(t)}();
+</script>
+<noscript><img src="https://vk.com/rtrg?p=YYYYYYYYYYYY" style="position:fixed; left:-999px;" alt="" /></noscript>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --cream: #F8F4EF;
+  --sand: #EDE6DC;
+  --warm-dark: #2C2420;
+  --muted: #7A6E67;
+  --accent: #C4956A;
+  --accent-dark: #9E7049;
+  --border: rgba(44,36,32,0.12);
+  --white: #FFFFFF;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Jost', sans-serif;
+  background: var(--cream);
+  color: var(--warm-dark);
+  font-weight: 300;
+  line-height: 1.7;
+  font-size: 16px;
+}
+.serif { font-family: 'Cormorant Garamond', serif; }
+
+/* NAV */
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.25rem 3rem;
+  border-bottom: 0.5px solid var(--border);
+  background: var(--cream);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+.nav-logo { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 400; letter-spacing: .05em; }
+.nav-phone { font-size: 14px; color: var(--muted); letter-spacing: .04em; }
+.nav-cta {
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  padding: 10px 24px;
+  border: 1px solid var(--warm-dark);
+  background: transparent;
+  color: var(--warm-dark);
+  cursor: pointer;
+  text-decoration: none;
+  transition: background .2s, color .2s;
+}
+.nav-cta:hover { background: var(--warm-dark); color: var(--cream); }
+
+/* HERO */
+.hero {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 90vh;
+}
+.hero-left {
+  padding: 5rem 4rem 5rem 3rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.hero-eyebrow {
+  font-size: 11px;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--accent-dark);
+  margin-bottom: 2rem;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.hero-eyebrow::before {
+  content: '';
+  display: block;
+  width: 32px;
+  height: 0.5px;
+  background: var(--accent-dark);
+}
+.hero-h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(42px, 5vw, 62px);
+  font-weight: 300;
+  line-height: 1.1;
+  margin-bottom: 2rem;
+  letter-spacing: -.01em;
+}
+.hero-h1 em { font-style: italic; color: var(--accent-dark); }
+.hero-sub {
+  font-size: 15px;
+  color: var(--muted);
+  max-width: 400px;
+  margin-bottom: 3rem;
+  line-height: 1.8;
+}
+.price-block {
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+  margin-bottom: 2.5rem;
+}
+.price-new {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 52px;
+  font-weight: 400;
+  color: var(--warm-dark);
+}
+.price-old {
+  font-size: 18px;
+  color: var(--muted);
+  text-decoration: line-through;
+}
+.price-note { font-size: 12px; color: var(--muted); }
+.btn-primary {
+  display: inline-block;
+  padding: 16px 40px;
+  background: var(--warm-dark);
+  color: var(--cream);
+  font-family: 'Jost', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  border: none;
+  transition: background .2s;
+  width: fit-content;
+}
+.btn-primary:hover { background: var(--accent-dark); }
+.hero-trust {
+  margin-top: 2.5rem;
+  display: flex;
+  gap: 2rem;
+  font-size: 13px;
+  color: var(--muted);
+}
+.hero-trust-item { display: flex; flex-direction: column; gap: 2px; }
+.hero-trust-num { font-family: 'Cormorant Garamond', serif; font-size: 26px; font-weight: 400; color: var(--warm-dark); }
+.hero-right {
+  background: var(--sand);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding: 3rem 2rem;
+}
+.hero-quote {
+  background: var(--white);
+  padding: 1.5rem 2rem;
+  max-width: 320px;
+  border-left: 2px solid var(--accent);
+}
+.hero-quote-text {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 18px;
+  font-style: italic;
+  font-weight: 300;
+  line-height: 1.5;
+  color: var(--warm-dark);
+  margin-bottom: .75rem;
+}
+.hero-quote-author { font-size: 12px; color: var(--muted); letter-spacing: .05em; }
+.hero-deco {
+  position: absolute;
+  top: 15%;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 160px;
+  font-weight: 300;
+  color: rgba(44,36,32,0.04);
+  white-space: nowrap;
+  user-select: none;
+  letter-spacing: -.03em;
+}
+
+/* PAIN SECTION */
+.pain-section {
+  padding: 6rem 3rem;
+  background: var(--white);
+}
+.section-label {
+  font-size: 11px;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--accent-dark);
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.section-label::before {
+  content: '';
+  display: block;
+  width: 32px;
+  height: 0.5px;
+  background: var(--accent-dark);
+}
+.pain-h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(32px, 4vw, 48px);
+  font-weight: 300;
+  line-height: 1.2;
+  max-width: 600px;
+  margin-bottom: 4rem;
+}
+.pain-h2 em { font-style: italic; color: var(--accent-dark); }
+.pain-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5px;
+  background: var(--border);
+}
+.pain-card {
+  background: var(--white);
+  padding: 2.5rem 2rem;
+}
+.pain-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 48px;
+  font-weight: 300;
+  color: var(--sand);
+  margin-bottom: .5rem;
+  line-height: 1;
+}
+.pain-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 20px;
+  font-weight: 400;
+  margin-bottom: .75rem;
+  color: var(--warm-dark);
+}
+.pain-text { font-size: 14px; color: var(--muted); line-height: 1.8; }
+.real-quote {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 16px;
+  font-style: italic;
+  color: var(--warm-dark);
+  border-left: 2px solid var(--accent);
+  padding: .5rem 1rem;
+  margin-top: 1rem;
+  background: var(--cream);
+}
+
+/* WHY LASER */
+.why-section {
+  padding: 6rem 3rem;
+  background: var(--cream);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: start;
+}
+.why-left { position: sticky; top: 100px; }
+.why-eyebrow { font-size: 11px; letter-spacing: .2em; text-transform: uppercase; color: var(--accent-dark); margin-bottom: 1rem; }
+.why-h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(32px, 3.5vw, 44px);
+  font-weight: 300;
+  line-height: 1.2;
+  margin-bottom: 1.5rem;
+}
+.why-intro { font-size: 15px; color: var(--muted); line-height: 1.8; }
+.why-items { display: flex; flex-direction: column; gap: 0; }
+.why-item {
+  padding: 2rem 0;
+  border-bottom: 0.5px solid var(--border);
+}
+.why-item:first-child { border-top: 0.5px solid var(--border); }
+.why-item-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 22px;
+  font-weight: 400;
+  margin-bottom: .5rem;
+}
+.why-item-text { font-size: 14px; color: var(--muted); line-height: 1.8; }
+
+/* THE TRUTH */
+.truth-section {
+  padding: 6rem 3rem;
+  background: var(--warm-dark);
+  color: var(--cream);
+}
+.truth-eyebrow { font-size: 11px; letter-spacing: .2em; text-transform: uppercase; color: var(--accent); margin-bottom: 1rem; display: flex; align-items: center; gap: 12px; }
+.truth-eyebrow::before { content: ''; display: block; width: 32px; height: 0.5px; background: var(--accent); }
+.truth-h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(32px, 4vw, 50px);
+  font-weight: 300;
+  line-height: 1.2;
+  margin-bottom: 3rem;
+  max-width: 600px;
+}
+.truth-h2 em { font-style: italic; color: var(--accent); }
+.truth-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; }
+.truth-col-title {
+  font-size: 11px;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 1.5rem;
+  padding-bottom: .75rem;
+  border-bottom: 0.5px solid rgba(196,149,106,0.3);
+}
+.truth-item { display: flex; gap: 1rem; margin-bottom: 1.5rem; align-items: flex-start; }
+.truth-marker { font-family: 'Cormorant Garamond', serif; font-size: 24px; color: rgba(248,244,239,0.2); line-height: 1; flex-shrink: 0; margin-top: -2px; }
+.truth-bad .truth-marker { color: rgba(196,149,106,0.4); }
+.truth-item-text { font-size: 14px; color: rgba(248,244,239,0.7); line-height: 1.7; }
+.truth-item-text strong { color: var(--cream); font-weight: 400; }
+
+/* REVIEWS */
+.reviews-section { padding: 6rem 3rem; background: var(--white); }
+.reviews-h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(30px, 3.5vw, 44px);
+  font-weight: 300;
+  margin-bottom: .5rem;
+}
+.reviews-sub { font-size: 14px; color: var(--muted); margin-bottom: 3rem; }
+.reviews-stars { color: var(--accent); font-size: 18px; margin-bottom: .25rem; }
+.reviews-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5px; background: var(--border); }
+.review-card { background: var(--white); padding: 2rem; }
+.review-stars { font-size: 14px; color: var(--accent); margin-bottom: .75rem; letter-spacing: 2px; }
+.review-text {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 17px;
+  font-style: italic;
+  font-weight: 300;
+  line-height: 1.6;
+  color: var(--warm-dark);
+  margin-bottom: 1rem;
+}
+.review-author { font-size: 12px; color: var(--muted); letter-spacing: .05em; }
+.review-date { font-size: 11px; color: rgba(122,110,103,0.6); margin-top: 2px; }
+
+/* HOW IT WORKS */
+.how-section { padding: 6rem 3rem; background: var(--cream); }
+.how-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 0; margin-top: 3rem; background: var(--border); }
+.how-step { background: var(--cream); padding: 2.5rem 2rem; }
+.how-step-num { font-family: 'Cormorant Garamond', serif; font-size: 64px; font-weight: 300; color: var(--sand); line-height: 1; margin-bottom: .75rem; }
+.how-step-title { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 400; margin-bottom: .5rem; }
+.how-step-text { font-size: 13px; color: var(--muted); line-height: 1.8; }
+
+/* OFFER */
+.offer-section {
+  padding: 6rem 3rem;
+  background: var(--sand);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+}
+.offer-left { }
+.offer-tag {
+  display: inline-block;
+  font-size: 11px;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+  padding: 6px 16px;
+  border: 1px solid var(--accent-dark);
+  color: var(--accent-dark);
+  margin-bottom: 1.5rem;
+}
+.offer-h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(36px, 4vw, 54px);
+  font-weight: 300;
+  line-height: 1.1;
+  margin-bottom: 1.5rem;
+}
+.offer-h2 em { font-style: italic; color: var(--accent-dark); }
+.offer-text { font-size: 15px; color: var(--muted); line-height: 1.8; margin-bottom: 2rem; }
+.offer-right {
+  background: var(--white);
+  padding: 3rem;
+}
+.offer-right-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 28px;
+  font-weight: 300;
+  margin-bottom: 2rem;
+  color: var(--warm-dark);
+}
+.offer-price-big {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 72px;
+  font-weight: 300;
+  line-height: 1;
+  color: var(--warm-dark);
+}
+.offer-price-old {
+  font-size: 20px;
+  color: var(--muted);
+  text-decoration: line-through;
+  margin-bottom: 2rem;
+}
+.offer-includes { margin: 1.5rem 0; }
+.offer-include-item {
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+  padding: .6rem 0;
+  border-bottom: 0.5px solid var(--border);
+  font-size: 14px;
+  color: var(--warm-dark);
+}
+.offer-check { color: var(--accent-dark); font-size: 16px; }
+.form-group { margin-bottom: 1rem; }
+.form-group input {
+  width: 100%;
+  padding: 14px 16px;
+  border: 0.5px solid var(--border);
+  background: var(--cream);
+  font-family: 'Jost', sans-serif;
+  font-size: 14px;
+  color: var(--warm-dark);
+  outline: none;
+  transition: border-color .2s;
+}
+.form-group input:focus { border-color: var(--accent-dark); }
+.form-group input::placeholder { color: var(--muted); }
+.form-submit {
+  width: 100%;
+  padding: 16px;
+  background: var(--warm-dark);
+  color: var(--cream);
+  font-family: 'Jost', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  border: none;
+  cursor: pointer;
+  transition: background .2s;
+  margin-top: .5rem;
+}
+.form-submit:hover { background: var(--accent-dark); }
+.form-note { font-size: 11px; color: var(--muted); margin-top: .75rem; text-align: center; }
+.offer-urgency {
+  margin-top: 1rem;
+  padding: .75rem 1rem;
+  background: var(--cream);
+  font-size: 13px;
+  color: var(--accent-dark);
+  text-align: center;
+  border-left: 2px solid var(--accent);
+}
+
+/* FAQ */
+.faq-section { padding: 6rem 3rem; background: var(--white); }
+.faq-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 3rem; }
+.faq-item { padding: 1.5rem 0; border-bottom: 0.5px solid var(--border); }
+.faq-q { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 400; margin-bottom: .75rem; }
+.faq-a { font-size: 14px; color: var(--muted); line-height: 1.8; }
+
+/* LOCATION */
+.location-section {
+  padding: 4rem 3rem;
+  background: var(--cream);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+  border-top: 0.5px solid var(--border);
+}
+.location-h3 { font-family: 'Cormorant Garamond', serif; font-size: 32px; font-weight: 300; margin-bottom: 1.5rem; }
+.location-item { display: flex; gap: 1rem; margin-bottom: 1rem; font-size: 14px; color: var(--muted); align-items: flex-start; }
+.location-icon { color: var(--accent-dark); font-size: 16px; margin-top: 2px; flex-shrink: 0; }
+.location-right { background: var(--sand); padding: 2rem; }
+.location-award {
+  font-size: 11px;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+  color: var(--accent-dark);
+  margin-bottom: .5rem;
+}
+.location-award-text {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 22px;
+  font-weight: 300;
+  margin-bottom: 1rem;
+}
+.location-rating { display: flex; align-items: baseline; gap: .75rem; }
+.location-rating-num { font-family: 'Cormorant Garamond', serif; font-size: 52px; font-weight: 300; }
+.location-rating-stars { color: var(--accent); font-size: 16px; letter-spacing: 2px; }
+.location-rating-count { font-size: 13px; color: var(--muted); }
+
+/* FOOTER CTA */
+.footer-cta {
+  padding: 5rem 3rem;
+  background: var(--warm-dark);
+  text-align: center;
+  color: var(--cream);
+}
+.footer-cta-h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(32px, 4vw, 52px);
+  font-weight: 300;
+  margin-bottom: 1rem;
+  line-height: 1.2;
+}
+.footer-cta-h2 em { font-style: italic; color: var(--accent); }
+.footer-cta-sub { font-size: 15px; color: rgba(248,244,239,0.6); margin-bottom: 2.5rem; }
+.btn-accent {
+  display: inline-block;
+  padding: 18px 48px;
+  background: var(--accent);
+  color: var(--white);
+  font-family: 'Jost', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  border: none;
+  transition: background .2s;
+}
+.btn-accent:hover { background: var(--accent-dark); }
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  nav { padding: 1rem 1.5rem; }
+  .nav-phone { display: none; }
+  .hero { grid-template-columns: 1fr; }
+  .hero-left { padding: 3rem 1.5rem; }
+  .hero-right { min-height: 260px; }
+  .pain-section, .why-section, .how-section, .offer-section,
+  .reviews-section, .faq-section, .location-section, .truth-section, .footer-cta { padding: 4rem 1.5rem; }
+  .why-section, .truth-cols, .offer-section, .faq-grid, .location-section { grid-template-columns: 1fr; gap: 2rem; }
+  .why-left { position: static; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">ES Beauty Clinic</div>
+  <div class="nav-phone">+7 (968) 437-34-96</div>
+  <a href="#offer" class="nav-cta">Записаться за 2 990 ₽</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-eyebrow">Лазерная эпиляция · м. Третьяковская · Москва</div>
+    <h1 class="hero-h1">
+      Всё тело без волос<br>
+      за 1 курс.<br>
+      <em>Первый сеанс — 2 990 ₽</em>
+    </h1>
+    <p class="hero-sub">
+      Вместо 6 000 ₽ · Без боли · Результат уже после первой процедуры.<br>
+      858 отзывов, рейтинг 5.0 — «Хорошее место 2026» на Яндекс Картах.
+    </p>
+    <div class="price-block">
+      <div>
+        <div class="price-new">2 990 ₽</div>
+        <div class="price-note">первый сеанс «всё тело»</div>
+      </div>
+      <div>
+        <div class="price-old">6 000 ₽</div>
+        <div class="price-note">обычная цена</div>
+      </div>
+    </div>
+    <a href="#offer" class="btn-primary">Записаться и сэкономить 3 010 ₽</a>
+    <div class="hero-trust">
+      <iframe src="https://yandex.ru/sprav/widget/rating-badge/185962993902?type=rating" width="150" height="50" frameborder="0" style="border:none;display:block;"></iframe>
+      <div class="hero-trust-item">
+        <span class="hero-trust-num">858</span>
+        <span>отзывов</span>
+      </div>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-deco">гладко</div>
+    <div class="hero-quote">
+      <div class="hero-quote-text">«Я полгода ходила в другую клинику каждый месяц — и если пропускала хоть раз, волосы снова росли. Здесь за тот же срок — практически волос не осталось»</div>
+      <div class="hero-quote-author">Somaieh, клиентка ES Beauty Clinic</div>
+    </div>
+  </div>
+</section>
+
+<!-- PAIN SECTION -->
+<section class="pain-section">
+  <div class="section-label">Это знакомо</div>
+  <h2 class="pain-h2">Устала от того, что это <em>никогда не заканчивается</em></h2>
+  <div class="pain-grid">
+    <div class="pain-card">
+      <div class="pain-num">01</div>
+      <div class="pain-title">«Снова через три дня»</div>
+      <div class="pain-text">Бритьё — это круговая порука. Сегодня гладко, через два дня — щетина, через три — уже неловко надевать шорты. И так по кругу. Бесконечно.</div>
+      <div class="real-quote">«Устала каждую неделю тратить время на бритьё. Хочу просто проснуться и не думать об этом»</div>
+    </div>
+    <div class="pain-card">
+      <div class="pain-num">02</div>
+      <div class="pain-title">Вросшие и раздражение</div>
+      <div class="pain-text">После воска или шугаринга — неделя в режиме «не трогай». Красные точки, вросшие волосы, пятна. И ощущение, что кожа вечно в каком-то переходном состоянии.</div>
+      <div class="real-quote">«Шрамики от вросших по всему телу там, где был шугаринг. Хватит уже с меня»</div>
+    </div>
+    <div class="pain-card">
+      <div class="pain-num">03</div>
+      <div class="pain-title">«Успела? Не успела?»</div>
+      <div class="pain-text">Пляж, бассейн, романтический вечер — и первая мысль не «как здорово», а «а я побрилась?». Это фоновое напряжение, которое отнимает удовольствие от жизни.</div>
+      <div class="real-quote">«С щетиной чувствую себя неуверенно. Всё время думаю об этом»</div>
+    </div>
+    <div class="pain-card">
+      <div class="pain-num">04</div>
+      <div class="pain-title">Деньги, которые «сгорают»</div>
+      <div class="pain-text">Шугаринг раз в месяц — это 2 000–3 000 ₽. В год — 30 000+. Каждый год. Снова и снова. За временный результат, который надо поддерживать до конца жизни.</div>
+      <div class="real-quote">«Я уже и не считаю, сколько на это потратила за три года. Жалею, что не начала лазер раньше»</div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY LASER / WHY QUALITY MATTERS -->
+<section class="why-section">
+  <div class="why-left">
+    <div class="why-eyebrow">Важно понять</div>
+    <h2 class="why-h2">Результат лазерной эпиляции зависит не от вас. Он зависит от <em>аппарата и мастера</em></h2>
+    <p class="why-intro">Это самая честная вещь, которую мы можем вам сказать. Многие девушки разочаровываются в лазере — потому что попали не туда. Не потому что лазер «не работает».</p>
+  </div>
+  <div class="why-items">
+    <div class="why-item">
+      <div class="why-item-title">Дешёвый аппарат = нет результата</div>
+      <div class="why-item-text">На рынке много сертификатов и акционных цен. За ними часто стоят устаревшие аппараты без нужной мощности. Вы ходите месяцами — и ничего не происходит. Врачи-косметологи называют это «дискредитацией методики».</div>
+    </div>
+    <div class="why-item">
+      <div class="why-item-title">Мастер без опыта — это ожоги и боль</div>
+      <div class="why-item-text">Неправильно настроенная мощность, спешка, незнание протоколов — и вместо гладкой кожи вы получаете ожоги и нежелание возвращаться. Опыт мастера — это не красивые слова, это ваша безопасность.</div>
+    </div>
+    <div class="why-item">
+      <div class="why-item-title">Александритовый лазер — золотой стандарт</div>
+      <div class="why-item-text">Александрит работает на длине волны 755 нм — это оптимально для большинства типов волос. С системой охлаждения он безболезненный, точный и даёт накопительный результат уже с первых сеансов. Именно его мы используем в ES Beauty.</div>
+    </div>
+    <div class="why-item">
+      <div class="why-item-title">Правильный курс — 6–8 сеансов</div>
+      <div class="why-item-text">Лазер работает только на активную фазу роста волоса. Поэтому курс — это не маркетинг, это физиология. При правильном интервале между процедурами эффект накапливается — и после курса волосы уходят навсегда.</div>
+    </div>
+  </div>
+</section>
+
+<!-- TRUTH SECTION -->
+<section class="truth-section">
+  <div class="truth-eyebrow">Честно о рынке</div>
+  <h2 class="truth-h2">Почему одни ходят <em>два года без результата</em>, а другие — довольны уже после трёх сеансов</h2>
+  <div class="truth-cols">
+    <div class="truth-bad">
+      <div class="truth-col-title">Как бывает — не у нас</div>
+      <div class="truth-item">
+        <div class="truth-marker">—</div>
+        <div class="truth-item-text"><strong>«Я вообще не поняла, что это было: процедура заняла в три раза меньше времени, ноги обрабатывались в каком-то хаотичном порядке, результата вообще ноль»</strong> — реальный отзыв о московской клинике</div>
+      </div>
+      <div class="truth-item">
+        <div class="truth-marker">—</div>
+        <div class="truth-item-text">Дешёвый аппарат без нужной мощности. Поверхностная обработка. Мастер торопится — следующий клиент уже ждёт.</div>
+      </div>
+      <div class="truth-item">
+        <div class="truth-marker">—</div>
+        <div class="truth-item-text">В итоге девушки ходят месяцами, платят деньги — и <strong>ничего не меняется</strong>. Разочаровываются и думают, что лазер «им не подходит».</div>
+      </div>
+      <div class="truth-item">
+        <div class="truth-marker">—</div>
+        <div class="truth-item-text">В сетях — стандарт «конвейера»: запись за записью, мастер не помнит вашу историю, настройки мощности не подбираются индивидуально.</div>
+      </div>
+    </div>
+    <div class="truth-good">
+      <div class="truth-col-title">Как это работает у нас</div>
+      <div class="truth-item">
+        <div class="truth-marker">+</div>
+        <div class="truth-item-text"><strong>«Результаты 10 из 10 и мне не приходится сейчас каждый месяц бежать на обычный лазер — эффект накопительный и практически волос не осталось»</strong> — клиентка Somaieh, 6 месяцев в ES Beauty</div>
+      </div>
+      <div class="truth-item">
+        <div class="truth-marker">+</div>
+        <div class="truth-item-text">Александритовый лазер с крио-охлаждением. Правильная мощность под ваш фототип — мастер настраивает аппарат индивидуально, а не «по умолчанию».</div>
+      </div>
+      <div class="truth-item">
+        <div class="truth-marker">+</div>
+        <div class="truth-item-text">Мастер — ваш специалист на весь курс. Знает вашу кожу, отслеживает динамику, корректирует протокол. Не конвейер — отношение.</div>
+      </div>
+      <div class="truth-item">
+        <div class="truth-marker">+</div>
+        <div class="truth-item-text">«Чувствуешь себя в руках профессионала. Лазер работает с охлаждением — никакого дискомфорта» — клиентка Анастасия, 2-й сеанс</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section class="reviews-section">
+  <div class="section-label">Что говорят клиентки</div>
+  <h2 class="reviews-h2">858 отзывов. Рейтинг 5.0.</h2>
+  <p class="reviews-sub">Не потому что попросили. Потому что результат говорит сам за себя.</p>
+  <div class="reviews-grid">
+    <div class="review-card">
+      <div class="review-stars">★★★★★</div>
+      <div class="review-text">«Я до этого в другой клинике ходила 2 целых года, каждый месяц на лазер всего тела, и не дай бог пропущу 1 месяц — уже начинали расти волосы. Здесь за полгода — практически волос не осталось»</div>
+      <div class="review-author">Somaieh Al-Marzooki</div>
+      <div class="review-date">29 марта 2025</div>
+    </div>
+    <div class="review-card">
+      <div class="review-stars">★★★★★</div>
+      <div class="review-text">«Была уже во второй раз у специалиста Анастасии. Чувствуешь себя на процедуре расслаблено, так как в руках профессионала. Лазер хороший, работает с охлаждением, никакого дискомфорта»</div>
+      <div class="review-author">Анастасия</div>
+      <div class="review-date">23 февраля 2025</div>
+    </div>
+    <div class="review-card">
+      <div class="review-stars">★★★★★</div>
+      <div class="review-text">«Пришла по рекомендации подруги. Благодаря Светлане я избавилась от нежелательных волос, чему безумно рада! Постоянно проводятся акции, можно приобрести абонемент в рассрочку»</div>
+      <div class="review-author">Ирина К.</div>
+      <div class="review-date">20 января 2025</div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how-section">
+  <div class="section-label">Как это устроено</div>
+  <h2 class="pain-h2" style="margin-bottom:0">Четыре шага <em>к гладкости</em></h2>
+  <div class="how-grid">
+    <div class="how-step">
+      <div class="how-step-num">01</div>
+      <div class="how-step-title">Вы записываетесь</div>
+      <div class="how-step-text">Оставляете заявку — мы перезваниваем в течение 15 минут и подбираем удобное время. Никаких долгих согласований.</div>
+    </div>
+    <div class="how-step">
+      <div class="how-step-num">02</div>
+      <div class="how-step-title">Консультация</div>
+      <div class="how-step-text">Мастер смотрит на тип кожи и волос, задаёт пару вопросов, настраивает аппарат индивидуально под вас. Не «стандартный протокол» — ваш протокол.</div>
+    </div>
+    <div class="how-step">
+      <div class="how-step-num">03</div>
+      <div class="how-step-title">Процедура</div>
+      <div class="how-step-text">Лазер с системой охлаждения. Большинство клиенток читают телефон во время сеанса. Ощущение — лёгкое тепло, максимум щелчок.</div>
+    </div>
+    <div class="how-step">
+      <div class="how-step-num">04</div>
+      <div class="how-step-title">Результат накапливается</div>
+      <div class="how-step-text">После каждого сеанса волос становится меньше и тоньше. К 6–8 процедуре большинство клиенток забывают, что такое бритьё.</div>
+    </div>
+  </div>
+</section>
+
+<!-- OFFER / FORM -->
+<section class="offer-section" id="offer">
+  <div class="offer-left">
+    <div class="offer-tag">Специальное предложение</div>
+    <h2 class="offer-h2">Убедитесь сами.<br><em>Один сеанс — и всё станет понятно</em></h2>
+    <p class="offer-text">
+      Мы не просим вас сразу купить курс и поверить на слово. Придите на пробный сеанс всего тела — почувствуете аппарат, познакомитесь с мастером, увидите первый результат. Дальше — ваше решение.
+    </p>
+    <p class="offer-text" style="color: var(--warm-dark); font-weight: 400;">
+      Именно поэтому мы делаем первый сеанс по специальной цене — чтобы у вас не было финансового риска. Только ваше время и доверие.
+    </p>
+  </div>
+  <div class="offer-right">
+    <div class="offer-right-title">Пробный сеанс «Всё тело»</div>
+    <div class="offer-price-big">2 990 ₽</div>
+    <div class="offer-price-old">вместо 6 000 ₽</div>
+    <div class="offer-includes">
+      <div class="offer-include-item">
+        <span class="offer-check">✓</span>
+        <span>Все зоны тела — один сеанс</span>
+      </div>
+      <div class="offer-include-item">
+        <span class="offer-check">✓</span>
+        <span>Современный лазер с системой охлаждения</span>
+      </div>
+      <div class="offer-include-item">
+        <span class="offer-check">✓</span>
+        <span>Индивидуальная настройка аппарата</span>
+      </div>
+      <div class="offer-include-item">
+        <span class="offer-check">✓</span>
+        <span>Консультация мастера включена</span>
+      </div>
+      <div class="offer-include-item">
+        <span class="offer-check">✓</span>
+        <span>Только для новых клиентов</span>
+      </div>
+    </div>
+    <div class="form-group">
+      <input type="text" placeholder="Ваше имя">
+    </div>
+    <div class="form-group">
+      <input type="tel" placeholder="Номер телефона">
+    </div>
+    <button class="form-submit" onclick="trackLead()">Записаться на пробный сеанс</button>
+    <div class="form-note">Перезвоним в течение 15 минут в рабочее время</div>
+    <div class="offer-urgency">Мест по акционной цене в мае — ограничено</div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq-section">
+  <div class="section-label">Вопросы</div>
+  <h2 class="reviews-h2">Отвечаем честно</h2>
+  <div class="faq-grid">
+    <div class="faq-item">
+      <div class="faq-q">Это больно?</div>
+      <div class="faq-a">Нет — с нашим оборудованием. Лазер оснащён системой крио-охлаждения: кожа охлаждается в момент вспышки. Большинство клиенток описывают ощущение как лёгкое тепло. Многие читают телефон прямо во время процедуры.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Сколько сеансов нужно?</div>
+      <div class="faq-a">В среднем 6–8 сеансов с интервалом 4–6 недель. После каждого волос становится меньше. После курса — поддерживающий сеанс раз в год или реже.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Почему я раньше ходила и результата не было?</div>
+      <div class="faq-a">Скорее всего — аппарат или протокол. Дешёвые лазеры без нужной мощности не дают эффекта. В ES Beauty — современные профессиональные лазеры и мастера, которые знают, как настроить аппарат под ваш тип волос и кожи.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Когда будет виден результат?</div>
+      <div class="faq-a">Первые изменения — уже после 1–2 сеансов. Волосы становятся тоньше и реже. К 3–4 сеансу большинство клиенток видят значительную разницу.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Можно купить в рассрочку?</div>
+      <div class="faq-a">Да. Абонемент на курс можно оформить в рассрочку. Спросите об этом администратора при записи — подберём удобный вариант.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Подходит ли для тёмной кожи?</div>
+      <div class="faq-a">Запишитесь на консультацию — мастер оценит ваш фототип и честно скажет, подойдёт ли александрит или порекомендует другой вариант. Мы не берёмся за процедуры, которые не дадут результата.</div>
+    </div>
+  </div>
+</section>
+
+<!-- LOCATION -->
+<section class="location-section">
+  <div class="location-left">
+    <h3 class="location-h3">Мы рядом с Третьяковской</h3>
+    <div class="location-item">
+      <span class="location-icon">◎</span>
+      <span>Москва, ул. Большая Ордынка, 17, стр. 1 — 5 минут пешком от м. Третьяковская</span>
+    </div>
+    <div class="location-item">
+      <span class="location-icon">◷</span>
+      <span>Режим работы: уточняйте при записи</span>
+    </div>
+    <div class="location-item">
+      <span class="location-icon">◈</span>
+      <span>+7 (968) 437-34-96 · esbeautyclinic.ru</span>
+    </div>
+    <div class="location-item">
+      <span class="location-icon">✓</span>
+      <span>Оплата картой, наличными, рассрочка, СБП</span>
+    </div>
+  </div>
+  <div class="location-right">
+    <div style="display:flex;flex-direction:column;gap:1rem;">
+      <iframe src="https://yandex.ru/sprav/widget/rating-badge/185962993902?type=award" width="150" height="50" frameborder="0" style="border:none;display:block;"></iframe>
+      <iframe src="https://yandex.ru/sprav/widget/rating-badge/185962993902?type=rating" width="150" height="50" frameborder="0" style="border:none;display:block;"></iframe>
+      <div class="location-rating">
+        <div class="location-rating-count" style="font-size:13px;color:var(--muted);">858 оценок</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER CTA -->
+<section class="footer-cta">
+  <h2 class="footer-cta-h2">Первый шаг — <em>пробный сеанс</em>.<br>Без обязательств.</h2>
+  <p class="footer-cta-sub">2 990 ₽ вместо 6 000 ₽ · Всё тело · Без боли · м. Третьяковская</p>
+  <a href="#offer" class="btn-accent">Записаться и сэкономить 3 010 ₽</a>
+</section>
+
+
+<script>
+function trackLead() {
+  var name = document.querySelector('input[type="text"]').value;
+  var phone = document.querySelector('input[type="tel"]').value;
+
+  if (!phone) {
+    alert('Пожалуйста, укажите номер телефона');
+    return;
+  }
+
+  /* Яндекс Метрика — цель «lead» */
+  if (typeof ym !== 'undefined') {
+    ym(XXXXXXXX, 'reachGoal', 'lead');
+  }
+
+  /* ВК Пиксель — событие «lead» */
+  if (typeof VK !== 'undefined') {
+    VK.Retargeting.Event('lead');
+  }
+
+  /* Визуальный фидбек */
+  var btn = document.querySelector('.form-submit');
+  btn.textContent = 'Заявка отправлена — перезвоним скоро';
+  btn.style.background = '#0F6E56';
+  btn.disabled = true;
+
+  /* Сюда добавьте отправку в вашу CRM или на почту */
+  /* Например: fetch('/send', { method:'POST', body: JSON.stringify({name, phone}) }) */
+}
+</script>
+
+</body>
+</html>
