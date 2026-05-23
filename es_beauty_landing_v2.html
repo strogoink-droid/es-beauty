@@ -165,8 +165,30 @@ nav {
   text-decoration: none;
   cursor: pointer;
   border: none;
-  transition: background .2s;
   width: fit-content;
+  position: relative;
+  overflow: hidden;
+  transition: background .2s;
+}
+.btn-primary::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(
+    105deg,
+    transparent 20%,
+    rgba(255,255,255,0.18) 50%,
+    transparent 80%
+  );
+  animation: btn-shimmer 3s ease-in-out infinite;
+}
+@keyframes btn-shimmer {
+  0%   { left: -100%; }
+  40%  { left: 150%; }
+  100% { left: 150%; }
 }
 .btn-primary:hover { background: var(--accent-dark); }
 .hero-trust {
@@ -476,6 +498,24 @@ nav {
   cursor: pointer;
   transition: background .2s;
   margin-top: .5rem;
+  position: relative;
+  overflow: hidden;
+}
+.form-submit::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(
+    105deg,
+    transparent 20%,
+    rgba(255,255,255,0.18) 50%,
+    transparent 80%
+  );
+  animation: btn-shimmer 3s ease-in-out infinite;
+  animation-delay: .8s;
 }
 .form-submit:hover { background: var(--accent-dark); }
 .form-note { font-size: 11px; color: var(--muted); margin-top: .75rem; text-align: center; }
@@ -558,20 +598,187 @@ nav {
   cursor: pointer;
   border: none;
   transition: background .2s;
+  position: relative;
+  overflow: hidden;
+}
+.btn-accent::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(
+    105deg,
+    transparent 20%,
+    rgba(255,255,255,0.22) 50%,
+    transparent 80%
+  );
+  animation: btn-shimmer 3s ease-in-out infinite;
+  animation-delay: 1.5s;
 }
 .btn-accent:hover { background: var(--accent-dark); }
 
-/* RESPONSIVE */
+/* RESPONSIVE — полная мобильная адаптация */
 @media (max-width: 768px) {
-  nav { padding: 1rem 1.5rem; }
+
+  /* NAV */
+  nav { padding: .85rem 1.25rem; }
   .nav-phone { display: none; }
-  .hero { grid-template-columns: 1fr; }
-  .hero-left { padding: 3rem 1.5rem; }
-  .hero-right { min-height: 260px; }
-  .pain-section, .why-section, .how-section, .offer-section,
-  .reviews-section, .faq-section, .location-section, .truth-section, .footer-cta { padding: 4rem 1.5rem; }
-  .why-section, .truth-cols, .offer-section, .faq-grid, .location-section { grid-template-columns: 1fr; gap: 2rem; }
+  .nav-logo { font-size: 17px; }
+  .nav-cta { font-size: 11px; padding: 8px 16px; }
+
+  /* HERO */
+  .hero { grid-template-columns: 1fr; min-height: auto; }
+  .hero-left { padding: 2rem 1.25rem 1.5rem; }
+  .hero-eyebrow { font-size: 10px; margin-bottom: 1rem; }
+  .hero-h1 { font-size: 36px; margin-bottom: 1.25rem; }
+  .hero-sub { font-size: 14px; margin-bottom: 1.5rem; }
+  .price-block { gap: 12px; margin-bottom: 1.5rem; }
+  .price-new { font-size: 40px; }
+  .price-old { font-size: 16px; }
+  .btn-primary {
+    width: 100%;
+    text-align: center;
+    padding: 16px 20px;
+    font-size: 12px;
+  }
+  .hero-trust { margin-top: 1.5rem; gap: 1.25rem; flex-wrap: wrap; }
+  .hero-trust-num { font-size: 22px; }
+  .hero-right { min-height: 200px; padding: 1.5rem 1.25rem; }
+  .hero-deco { font-size: 80px; }
+  .hero-quote { max-width: 100%; padding: 1rem 1.25rem; }
+  .hero-quote-text { font-size: 15px; }
+
+  /* SECTIONS — отступы */
+  .pain-section,
+  .reviews-section,
+  .how-section,
+  .faq-section,
+  .footer-cta { padding: 3rem 1.25rem; }
+
+  .why-section,
+  .truth-section,
+  .offer-section,
+  .location-section { padding: 3rem 1.25rem; }
+
+  /* PAIN */
+  .pain-h2 { font-size: 28px; margin-bottom: 2rem; }
+  .pain-grid { grid-template-columns: 1fr; gap: 1.5px; }
+  .pain-card { padding: 1.75rem 1.25rem; }
+  .pain-num { font-size: 36px; }
+  .pain-title { font-size: 18px; }
+  .real-quote { font-size: 14px; }
+
+  /* WHY */
+  .why-section { grid-template-columns: 1fr; gap: 2rem; }
   .why-left { position: static; }
+  .why-h2 { font-size: 26px; }
+  .why-intro { font-size: 14px; }
+  .why-item { padding: 1.25rem 0; }
+  .why-item-title { font-size: 18px; }
+  .why-item-text { font-size: 13px; }
+
+  /* TRUTH */
+  .truth-cols { grid-template-columns: 1fr; gap: 2rem; }
+  .truth-h2 { font-size: 26px; }
+  .truth-item-text { font-size: 13px; }
+
+  /* REVIEWS */
+  .reviews-h2 { font-size: 26px; }
+  .reviews-grid { grid-template-columns: 1fr; }
+  .review-card { padding: 1.5rem 1.25rem; }
+  .review-text { font-size: 15px; }
+
+  /* HOW */
+  .how-grid { grid-template-columns: 1fr; }
+  .how-step { padding: 1.75rem 1.25rem; }
+  .how-step-num { font-size: 48px; }
+  .how-step-title { font-size: 18px; }
+  .how-step-text { font-size: 13px; }
+
+  /* OFFER */
+  .offer-section { grid-template-columns: 1fr; gap: 2rem; }
+  .offer-h2 { font-size: 28px; }
+  .offer-text { font-size: 14px; }
+  .offer-right { padding: 1.75rem 1.25rem; }
+  .offer-right-title { font-size: 22px; }
+  .offer-price-big { font-size: 54px; }
+  .offer-price-old { font-size: 16px; }
+  .offer-include-item { font-size: 13px; }
+  .form-group input { padding: 13px 14px; font-size: 16px; } /* 16px — не зумит iOS */
+  .form-submit {
+    font-size: 12px;
+    padding: 15px;
+    letter-spacing: .08em;
+  }
+  .offer-tag { font-size: 10px; }
+
+  /* FAQ */
+  .faq-grid { grid-template-columns: 1fr; gap: 0; }
+  .faq-q { font-size: 18px; }
+  .faq-a { font-size: 13px; }
+
+  /* LOCATION */
+  .location-section { grid-template-columns: 1fr; gap: 2rem; }
+  .location-h3 { font-size: 24px; margin-bottom: 1rem; }
+  .location-item { font-size: 13px; }
+  .location-right { padding: 1.5rem 1.25rem; }
+  .location-rating-num { font-size: 40px; }
+
+  /* FOOTER CTA */
+  .footer-cta-h2 { font-size: 28px; }
+  .footer-cta-sub { font-size: 13px; margin-bottom: 2rem; }
+  .btn-accent {
+    display: block;
+    width: 100%;
+    text-align: center;
+    padding: 16px 20px;
+    font-size: 12px;
+  }
+
+  /* Sticky кнопка записи снизу */
+  .mobile-sticky-cta {
+    display: block;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: var(--warm-dark);
+    color: var(--cream);
+    text-align: center;
+    padding: 16px 20px;
+    font-family: 'Jost', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    text-decoration: none;
+    z-index: 200;
+    border-top: 1px solid rgba(248,244,239,0.1);
+    overflow: hidden;
+  }
+  .mobile-sticky-cta::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 60%;
+    height: 100%;
+    background: linear-gradient(
+      105deg,
+      transparent 20%,
+      rgba(255,255,255,0.15) 50%,
+      transparent 80%
+    );
+    animation: btn-shimmer 3s ease-in-out infinite;
+    animation-delay: .4s;
+  }
+  body { padding-bottom: 58px; }
+}
+
+@media (min-width: 769px) {
+  .mobile-sticky-cta { display: none; }
 }
 </style>
 </head>
@@ -826,8 +1033,27 @@ nav {
       <input type="text" placeholder="Ваше имя">
     </div>
     <div class="form-group">
-      <input type="tel" placeholder="Номер телефона">
+      <input type="tel" id="phone" placeholder="Номер телефона">
     </div>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intl-tel-input@23/build/css/intlTelInput.css">
+    <style>
+      .iti { width: 100%; }
+      .iti__tel-input {
+        width: 100%;
+        padding: 14px 16px 14px 52px !important;
+        border: 0.5px solid rgba(44,36,32,0.12) !important;
+        background: #F8F4EF !important;
+        font-family: 'Jost', sans-serif !important;
+        font-size: 14px !important;
+        color: #2C2420 !important;
+        outline: none !important;
+        box-shadow: none !important;
+        border-radius: 0 !important;
+      }
+      .iti__tel-input:focus { border-color: #9E7049 !important; }
+      .iti__flag-container { border-radius: 0; }
+      .iti__selected-dial-code { font-size: 13px; color: #7A6E67; }
+    </style>
     <button class="form-submit" onclick="trackLead()">Записаться на пробный сеанс</button>
     <div class="form-note">Перезвоним в течение 15 минут в рабочее время</div>
     <div class="offer-urgency">Мест по акционной цене в мае — ограничено</div>
@@ -906,36 +1132,46 @@ nav {
 </section>
 
 
+
+
+<a href="#offer" class="mobile-sticky-cta">Записаться за 2 990 ₽ →</a>
+
+<script src="https://cdn.jsdelivr.net/npm/intl-tel-input@23/build/js/intlTelInput.min.js"></script>
 <script>
+var phoneInput = document.getElementById('phone');
+var iti = window.intlTelInput(phoneInput, {
+  initialCountry: 'auto',
+  geoIpLookup: function(callback) {
+    fetch('https://ipapi.co/json/')
+      .then(function(res) { return res.json(); })
+      .then(function(data) { callback(data.country_code); })
+      .catch(function() { callback('ru'); });
+  },
+  preferredCountries: ['ru', 'by', 'kz', 'ua'],
+  separateDialCode: true,
+  utilsScript: 'https://cdn.jsdelivr.net/npm/intl-tel-input@23/build/js/utils.js'
+});
+
+/* Стилизация под дизайн лендинга */
+document.querySelector('.iti').style.width = '100%';
+
 function trackLead() {
   var name = document.querySelector('input[type="text"]').value;
-  var phone = document.querySelector('input[type="tel"]').value;
+  var phone = iti.getNumber();
 
-  if (!phone) {
+  if (!phoneInput.value) {
     alert('Пожалуйста, укажите номер телефона');
     return;
   }
 
-  /* Яндекс Метрика — цель «lead» */
-  if (typeof ym !== 'undefined') {
-    ym(XXXXXXXX, 'reachGoal', 'lead');
-  }
+  if (typeof ym !== 'undefined') { ym(XXXXXXXX, 'reachGoal', 'lead'); }
+  if (typeof VK !== 'undefined') { VK.Retargeting.Event('lead'); }
 
-  /* ВК Пиксель — событие «lead» */
-  if (typeof VK !== 'undefined') {
-    VK.Retargeting.Event('lead');
-  }
-
-  /* Визуальный фидбек */
   var btn = document.querySelector('.form-submit');
   btn.textContent = 'Заявка отправлена — перезвоним скоро';
   btn.style.background = '#0F6E56';
   btn.disabled = true;
-
-  /* Сюда добавьте отправку в вашу CRM или на почту */
-  /* Например: fetch('/send', { method:'POST', body: JSON.stringify({name, phone}) }) */
 }
 </script>
-
 </body>
 </html>
