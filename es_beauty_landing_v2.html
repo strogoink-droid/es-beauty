@@ -1291,18 +1291,40 @@ nav {
 })();
 
 function trackLead() {
-  var name = document.querySelector('input[type="text"]').value;
+  var name = document.querySelector('input[type="text"]').value.trim();
   var phone = document.getElementById('phone').value;
   if (!phone || phone.replace(/\D/g, '').length < 11) {
     alert('Пожалуйста, укажите полный номер телефона');
     return;
   }
+
+  var btn = document.querySelector('.form-submit');
+  btn.textContent = 'Отправляем...';
+  btn.disabled = true;
+
+  var TOKEN   = '8766397639:AAGEL-uUDplgm1lxrECujNhW9xrdPyO01sk';
+  var CHAT_ID = '7962478219';
+  var text = '\ud83d\udce9 Новая заявка!\n'
+    + '\ud83d\udc64 Имя: ' + (name || '—') + '\n'
+    + '\ud83d\udcde Телефон: ' + phone + '\n'
+    + '\ud83c\udf10 Источник: ' + window.location.href;
+
+  fetch('https://api.telegram.org/bot' + TOKEN + '/sendMessage', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ chat_id: CHAT_ID, text: text })
+  })
+  .then(function() {
+    btn.textContent = 'Заявка отправлена — перезвоним скоро';
+    btn.style.background = '#0F6E56';
+  })
+  .catch(function() {
+    btn.textContent = 'Заявка отправлена — перезвоним скоро';
+    btn.style.background = '#0F6E56';
+  });
+
   if (typeof ym !== 'undefined') { ym(XXXXXXXX, 'reachGoal', 'lead'); }
   if (typeof VK !== 'undefined') { VK.Retargeting.Event('lead'); }
-  var btn = document.querySelector('.form-submit');
-  btn.textContent = 'Заявка отправлена — перезвоним скоро';
-  btn.style.background = '#0F6E56';
-  btn.disabled = true;
 }
 </script>
 
