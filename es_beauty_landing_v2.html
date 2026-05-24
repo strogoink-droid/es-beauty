@@ -1306,8 +1306,11 @@ function trackLead() {
 }
 </script>
 
+
 <!-- EXIT INTENT POPUP -->
 <style>
+
+/* === ДЕСКТОП: полноэкранный оверлей === */
 .exit-popup-overlay {
   display: none;
   position: fixed;
@@ -1319,6 +1322,7 @@ function trackLead() {
   padding: 1.5rem;
 }
 .exit-popup-overlay.active { display: flex; }
+
 .exit-popup {
   background: var(--cream);
   max-width: 360px;
@@ -1335,131 +1339,220 @@ function trackLead() {
 .exit-popup-close {
   position: absolute;
   top: 1rem; right: 1rem;
-  background: none;
-  border: none;
-  font-size: 20px;
-  cursor: pointer;
-  color: var(--muted);
-  line-height: 1;
+  background: none; border: none;
+  font-size: 20px; cursor: pointer;
+  color: var(--muted); line-height: 1;
 }
 .exit-popup-label {
   font-family: "Jost", sans-serif;
-  font-size: 11px;
-  letter-spacing: .18em;
+  font-size: 11px; letter-spacing: .18em;
   text-transform: uppercase;
-  color: var(--accent-dark);
-  margin-bottom: 1rem;
+  color: var(--accent-dark); margin-bottom: 1rem;
 }
 .exit-popup-title {
   font-family: "Cormorant Garamond", serif;
-  font-size: 26px;
-  font-weight: 400;
-  color: var(--warm-dark);
-  line-height: 1.3;
-  margin-bottom: .5rem;
+  font-size: 26px; font-weight: 400;
+  color: var(--warm-dark); line-height: 1.3; margin-bottom: .5rem;
 }
 .exit-popup-timer {
   font-family: "Cormorant Garamond", serif;
-  font-size: 56px;
-  font-weight: 300;
-  color: var(--accent-dark);
-  line-height: 1;
-  margin: .75rem 0 1.5rem;
-  letter-spacing: .04em;
+  font-size: 56px; font-weight: 300;
+  color: var(--accent-dark); line-height: 1;
+  margin: .75rem 0 1.5rem; letter-spacing: .04em;
 }
 .exit-popup-btn {
-  display: block;
-  width: 100%;
-  padding: 15px;
-  background: var(--warm-dark);
-  color: var(--cream);
-  font-family: "Jost", sans-serif;
-  font-size: 12px;
-  font-weight: 500;
-  letter-spacing: .12em;
-  text-transform: uppercase;
-  border: none;
-  cursor: pointer;
-  text-decoration: none;
-  position: relative;
-  overflow: hidden;
+  display: block; width: 100%; padding: 15px;
+  background: var(--warm-dark); color: var(--cream);
+  font-family: "Jost", sans-serif; font-size: 12px;
+  font-weight: 500; letter-spacing: .12em; text-transform: uppercase;
+  border: none; cursor: pointer; text-decoration: none;
+  position: relative; overflow: hidden;
 }
 .exit-popup-btn::after {
-  content: "";
-  position: absolute;
-  top: 0; left: -100%;
-  width: 60%; height: 100%;
+  content: ""; position: absolute;
+  top: 0; left: -100%; width: 60%; height: 100%;
   background: linear-gradient(105deg, transparent 20%, rgba(255,255,255,0.18) 50%, transparent 80%);
   animation: btn-shimmer 3s ease-in-out infinite;
 }
 .exit-popup-sub {
-  font-size: 12px;
-  color: var(--muted);
-  margin-top: .75rem;
+  font-size: 12px; color: var(--muted); margin-top: .75rem;
+}
+
+/* === МОБИЛКА: плашка снизу === */
+.exit-bar {
+  display: none;
+  position: fixed;
+  bottom: 58px; /* выше sticky кнопки */
+  left: 0; right: 0;
+  background: var(--warm-dark);
+  color: var(--cream);
+  z-index: 999;
+  padding: .85rem 1.25rem;
+  box-shadow: 0 -4px 20px rgba(44,36,32,0.25);
+  animation: bar-in .3s ease;
+}
+.exit-bar.active { display: block; }
+@keyframes bar-in {
+  from { transform: translateY(100%); opacity: 0; }
+  to   { transform: translateY(0);    opacity: 1; }
+}
+.exit-bar-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+.exit-bar-text { flex: 1; }
+.exit-bar-title {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 17px; font-weight: 400; line-height: 1.2;
+  color: var(--cream);
+}
+.exit-bar-timer {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 28px; font-weight: 300;
+  color: var(--accent); line-height: 1;
+  margin-top: .1rem;
+}
+.exit-bar-btn {
+  flex-shrink: 0;
+  padding: 10px 16px;
+  background: var(--accent);
+  color: var(--white);
+  font-family: "Jost", sans-serif;
+  font-size: 11px; font-weight: 500;
+  letter-spacing: .1em; text-transform: uppercase;
+  border: none; cursor: pointer; text-decoration: none;
+  white-space: nowrap;
+}
+.exit-bar-close {
+  flex-shrink: 0;
+  background: none; border: none;
+  color: rgba(248,244,239,0.5);
+  font-size: 18px; cursor: pointer; padding: 0 0 0 .5rem;
+  line-height: 1;
+}
+
+/* На мобилке скрываем оверлей, на десктопе скрываем плашку */
+@media (max-width: 768px) {
+  .exit-popup-overlay { display: none !important; }
+}
+@media (min-width: 769px) {
+  .exit-bar { display: none !important; }
 }
 </style>
 
+<!-- Десктоп оверлей -->
 <div class="exit-popup-overlay" id="exitPopup">
   <div class="exit-popup">
-    <button class="exit-popup-close" onclick="closeExitPopup()">&#x2715;</button>
+    <button class="exit-popup-close" onclick="closeExitDesktop()">&#x2715;</button>
     <div class="exit-popup-label">Специальное предложение</div>
     <div class="exit-popup-title">Скидка сгорит через</div>
-    <div class="exit-popup-timer" id="exitTimer">00:59</div>
-    <a href="#form" class="exit-popup-btn" onclick="closeExitPopup()">Записаться за 2 990 &#8381;</a>
-    <div class="exit-popup-sub">Пробный сеанс «Всё тело» &middot; вместо 6 000 &#8381;</div>
+    <div class="exit-popup-timer" id="exitTimerDesktop">00:59</div>
+    <a href="#form" class="exit-popup-btn" onclick="closeExitDesktop()">Записаться за 2 990 &#8381;</a>
+    <div class="exit-popup-sub">Пробный сеанс &laquo;Всё тело&raquo; &middot; вместо 6 000 &#8381;</div>
+  </div>
+</div>
+
+<!-- Мобильная плашка снизу -->
+<div class="exit-bar" id="exitBar">
+  <div class="exit-bar-inner">
+    <div class="exit-bar-text">
+      <div class="exit-bar-title">Скидка сгорит через</div>
+      <div class="exit-bar-timer" id="exitTimerMobile">00:59</div>
+    </div>
+    <a href="#form" class="exit-bar-btn" onclick="closeExitMobile()">Записаться</a>
+    <button class="exit-bar-close" onclick="closeExitMobile()">&#x2715;</button>
   </div>
 </div>
 
 <script>
 (function() {
-  var popup = document.getElementById("exitPopup");
-  var timerEl = document.getElementById("exitTimer");
-  var shown = false;
-  var interval = null;
-  var seconds = 59;
+  var isMobile = window.innerWidth <= 768;
 
+  // ── Утилиты ──────────────────────────────────────────────────────────────
   function pad(n) { return n < 10 ? "0" + n : "" + n; }
 
-  function startTimer() {
-    seconds = 59;
-    timerEl.textContent = "00:" + pad(seconds);
-    interval = setInterval(function() {
-      seconds--;
-      timerEl.textContent = "00:" + pad(seconds);
-      if (seconds <= 0) { clearInterval(interval); }
+  function makeTimer(el) {
+    var s = 59;
+    el.textContent = "00:" + pad(s);
+    return setInterval(function() {
+      s--;
+      el.textContent = "00:" + pad(s);
+      if (s <= 0) el.textContent = "00:00";
     }, 1000);
   }
 
-  function showPopup() {
-    if (shown) return;
-    shown = true;
-    popup.classList.add("active");
-    startTimer();
-  }
+  // ── ДЕСКТОП ───────────────────────────────────────────────────────────────
+  var desktopPopup  = document.getElementById("exitPopup");
+  var desktopTimer  = document.getElementById("exitTimerDesktop");
+  var desktopShown  = false;
+  var desktopIval   = null;
 
-  window.closeExitPopup = function() {
-    popup.classList.remove("active");
-    clearInterval(interval);
+  window.closeExitDesktop = function() {
+    desktopPopup.classList.remove("active");
+    clearInterval(desktopIval);
   };
 
-  // Десктоп: курсор уходит за верхний край
-  document.addEventListener("mouseleave", function(e) {
-    if (e.clientY < 10) showPopup();
+  function showDesktop() {
+    if (desktopShown) return;
+    desktopShown = true;
+    desktopPopup.classList.add("active");
+    desktopIval = makeTimer(desktopTimer);
+  }
+
+  desktopPopup.addEventListener("click", function(e) {
+    if (e.target === desktopPopup) closeExitDesktop();
   });
 
-  // Мобилка: быстрый скролл вверх в начало страницы
-  var lastY = window.scrollY;
-  window.addEventListener("scroll", function() {
-    var cur = window.scrollY;
-    var delta = lastY - cur;
-    if (delta > 60 && cur < 300 && cur > 0) showPopup();
-    lastY = cur;
-  });
+  // Курсор уходит в верхние ~10% экрана (к кнопке закрыть вкладку)
+  if (!isMobile) {
+    document.addEventListener("mousemove", function(e) {
+      if (e.clientY < window.innerHeight * 0.08) showDesktop();
+    });
+  }
 
-  // Клик на фон закрывает
-  popup.addEventListener("click", function(e) {
-    if (e.target === popup) closeExitPopup();
-  });
+  // ── МОБИЛКА ───────────────────────────────────────────────────────────────
+  var mobileBar   = document.getElementById("exitBar");
+  var mobileTimer = document.getElementById("exitTimerMobile");
+  var mobileShown = false;
+  var mobileIval  = null;
+
+  window.closeExitMobile = function() {
+    mobileBar.classList.remove("active");
+    clearInterval(mobileIval);
+  };
+
+  function showMobile() {
+    if (mobileShown) return;
+    mobileShown = true;
+    mobileBar.classList.add("active");
+    mobileIval = makeTimer(mobileTimer);
+  }
+
+  // Появляется когда человек ушёл от блока формы (IntersectionObserver)
+  if (isMobile) {
+    var formBlock = document.getElementById("form");
+    if (formBlock && "IntersectionObserver" in window) {
+      var formVisible = false;
+      var formSeen    = false; // был ли он виден хоть раз
+
+      var obs = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            formVisible = true;
+            formSeen    = true;
+          } else if (formSeen && !entry.isIntersecting) {
+            // Ушёл от формы — показываем плашку
+            formVisible = false;
+            showMobile();
+          }
+        });
+      }, { threshold: 0.15 });
+
+      obs.observe(formBlock);
+    }
+  }
 })();
 </script>
 
