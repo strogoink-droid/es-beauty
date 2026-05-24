@@ -1515,10 +1515,15 @@ function trackLead() {
     + '\ud83d\udcde Телефон: ' + phone + '\n'
     + '\ud83c\udf10 Источник: ' + window.location.href;
 
-  fetch('https://api.telegram.org/bot' + TOKEN + '/sendMessage', {
+  var NOTIFY_URL = 'https://notify.events/api/v1/channel/source/kwyfigobnvlk9o09apeqo8i-rnf40ti_/execute';
+  var msg = '<b>📩 Новая заявка!</b>\n'
+    + '👤 Имя: ' + (name || '—') + '\n'
+    + '📞 Телефон: ' + phone;
+
+  fetch(NOTIFY_URL, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ chat_id: CHAT_ID, text: text })
+    body: JSON.stringify({ title: 'Новая заявка ES Beauty', content: msg, priority: 1 })
   })
   .then(function() {
     btn.textContent = 'Заявка отправлена — перезвоним скоро';
