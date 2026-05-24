@@ -1035,6 +1035,7 @@ nav {
   .mobile-sticky-cta { display: none; }
 }
 </style>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 </head>
 <body>
 
@@ -1515,12 +1516,11 @@ function trackLead() {
     + '\ud83d\udcde Телефон: ' + phone + '\n'
     + '\ud83c\udf10 Источник: ' + window.location.href;
 
-  var content = encodeURIComponent('Имя: ' + (name || '—') + '\nТелефон: ' + phone);
-  var title = encodeURIComponent('📩 Новая заявка ES Beauty');
-  var NOTIFY_URL = 'https://notify.events/api/v1/channel/source/kwyfigobnvlk9o09apeqo8i-rnf40ti_/execute'
-    + '?title=' + title + '&content=' + content + '&priority=2';
-
-  fetch(NOTIFY_URL)
+  emailjs.init('z6aehgk6F5cqTxRDp');
+  emailjs.send('service_jknma37', 'template_k8kt1xg', {
+    name: name || '—',
+    phone: phone
+  })
   .then(function() {
     btn.textContent = 'Заявка отправлена — перезвоним скоро';
     btn.style.background = '#0F6E56';
