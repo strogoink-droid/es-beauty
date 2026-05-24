@@ -364,6 +364,81 @@ nav {
   .messenger-btn { justify-content: center; }
 }
 
+
+/* CONTACTS SECTION */
+.contacts-section {
+  display: grid;
+  grid-template-columns: 420px 1fr;
+  min-height: 480px;
+  background: var(--white);
+}
+.contacts-left {
+  padding: 3.5rem 3rem;
+  background: var(--white);
+  border-right: 0.5px solid var(--border);
+  overflow-y: auto;
+}
+.contacts-h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 36px;
+  font-weight: 300;
+  color: var(--warm-dark);
+  margin-bottom: 2rem;
+}
+.contacts-group { margin-bottom: 1.5rem; }
+.contacts-label {
+  font-family: 'Jost', sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--warm-dark);
+  margin-bottom: .5rem;
+}
+.contacts-row {
+  display: flex;
+  align-items: flex-start;
+  gap: .6rem;
+  font-size: 15px;
+  color: var(--warm-dark);
+  line-height: 1.5;
+}
+.contacts-row svg { flex-shrink: 0; margin-top: 2px; color: var(--accent-dark); }
+.contacts-link {
+  color: var(--warm-dark);
+  text-decoration: none;
+}
+.contacts-link:hover { color: var(--accent-dark); }
+.contacts-socials {
+  display: flex;
+  gap: .6rem;
+  margin-top: .75rem;
+  margin-left: 1.6rem;
+}
+.social-btn {
+  width: 38px; height: 38px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  transition: opacity .2s, transform .15s;
+}
+.social-btn:hover { opacity: .85; transform: translateY(-2px); }
+.social-wa  { background: #25D366; color: #fff; }
+.social-tg  { background: #229ED9; color: #fff; }
+.social-ig  { background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%); color: #fff; }
+
+.contacts-map { position: relative; min-height: 480px; }
+.contacts-map iframe { position: absolute; inset: 0; width: 100%; height: 100%; }
+
+@media (max-width: 768px) {
+  .contacts-section { grid-template-columns: 1fr; }
+  .contacts-left { padding: 2.5rem 1.25rem; border-right: none; border-bottom: 0.5px solid var(--border); }
+  .contacts-h2 { font-size: 28px; margin-bottom: 1.5rem; }
+  .contacts-map { min-height: 300px; position: relative; }
+}
+
 /* PAIN SECTION */
 .pain-section {
   padding: 6rem 3rem;
@@ -657,10 +732,46 @@ nav {
 
 /* FAQ */
 .faq-section { padding: 6rem 3rem; background: var(--white); }
-.faq-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 3rem; }
-.faq-item { padding: 1.5rem 0; border-bottom: 0.5px solid var(--border); }
-.faq-q { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 400; margin-bottom: .75rem; }
-.faq-a { font-size: 15px; color: var(--warm-dark); line-height: 1.8; }
+.faq-grid { display: grid; grid-template-columns: 1fr; gap: 0; margin-top: 3rem; max-width: 780px; }
+.faq-item { border-bottom: 0.5px solid var(--border); }
+.faq-q {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 20px;
+  font-weight: 400;
+  padding: 1.25rem 0;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  user-select: none;
+  transition: color .2s;
+}
+.faq-q:hover { color: var(--accent-dark); }
+.faq-q::after {
+  content: '+';
+  font-family: 'Jost', sans-serif;
+  font-size: 22px;
+  font-weight: 300;
+  flex-shrink: 0;
+  color: var(--accent-dark);
+  transition: transform .3s ease;
+  line-height: 1;
+}
+.faq-item.open .faq-q::after { transform: rotate(45deg); }
+.faq-a {
+  font-size: 15px;
+  color: var(--warm-dark);
+  line-height: 1.8;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height .4s ease, padding .3s ease;
+  padding-bottom: 0;
+}
+.faq-item.open .faq-a {
+  max-height: 400px;
+  padding-bottom: 1.25rem;
+}
 
 /* LOCATION */
 .location-section {
@@ -859,8 +970,8 @@ nav {
 
   /* FAQ */
   .faq-grid { grid-template-columns: 1fr; gap: 0; }
-  .faq-q { font-size: 18px; }
-  .faq-a { font-size: 13px; }
+  .faq-q { font-size: 17px; }
+  .faq-a { font-size: 14px; }
 
   /* LOCATION */
   .location-section { grid-template-columns: 1fr; gap: 2rem; }
@@ -1213,62 +1324,95 @@ nav {
   <h2 class="reviews-h2">Отвечаем честно</h2>
   <div class="faq-grid">
     <div class="faq-item">
-      <div class="faq-q">Это больно?</div>
+      <div class="faq-q" onclick="toggleFaq(this)">Это больно?</div>
       <div class="faq-a">Нет — с нашим оборудованием. Лазер оснащён системой крио-охлаждения: кожа охлаждается в момент вспышки. Большинство клиенток описывают ощущение как лёгкое тепло. Многие читают телефон прямо во время процедуры.</div>
     </div>
     <div class="faq-item">
-      <div class="faq-q">Сколько сеансов нужно?</div>
+      <div class="faq-q" onclick="toggleFaq(this)">Сколько сеансов нужно?</div>
       <div class="faq-a">В среднем 6–8 сеансов с интервалом 4–6 недель. После каждого волос становится меньше. После курса — поддерживающий сеанс раз в год или реже.</div>
     </div>
     <div class="faq-item">
-      <div class="faq-q">Почему я раньше ходила и результата не было?</div>
+      <div class="faq-q" onclick="toggleFaq(this)">Почему я раньше ходила и результата не было?</div>
       <div class="faq-a">Скорее всего — аппарат или протокол. Дешёвые лазеры без нужной мощности не дают эффекта. В ES Beauty — современные профессиональные лазеры и мастера, которые знают, как настроить аппарат под ваш тип волос и кожи.</div>
     </div>
     <div class="faq-item">
-      <div class="faq-q">Когда будет виден результат?</div>
+      <div class="faq-q" onclick="toggleFaq(this)">Когда будет виден результат?</div>
       <div class="faq-a">Первые изменения — уже после 1–2 сеансов. Волосы становятся тоньше и реже. К 3–4 сеансу большинство клиенток видят значительную разницу.</div>
     </div>
     <div class="faq-item">
-      <div class="faq-q">Можно купить в рассрочку?</div>
+      <div class="faq-q" onclick="toggleFaq(this)">Можно купить в рассрочку?</div>
       <div class="faq-a">Да. Абонемент на курс можно оформить в рассрочку. Спросите об этом администратора при записи — подберём удобный вариант.</div>
     </div>
     <div class="faq-item">
-      <div class="faq-q">Подходит ли для тёмной кожи?</div>
+      <div class="faq-q" onclick="toggleFaq(this)">Подходит ли для тёмной кожи?</div>
       <div class="faq-a">Запишитесь на консультацию — мастер оценит ваш фототип и честно скажет, подойдёт ли александрит или порекомендует другой вариант. Мы не берёмся за процедуры, которые не дадут результата.</div>
     </div>
   </div>
 </section>
 
 <!-- LOCATION -->
-<section class="location-section">
-  <div class="location-left">
-    <h3 class="location-h3">Мы рядом с Третьяковской</h3>
-    <div class="location-item">
-      <span class="location-icon">◎</span>
-      <span>Москва, ул. Большая Ордынка, 17, стр. 1 — 5 минут пешком от м. Третьяковская</span>
+<!-- CONTACTS + MAP -->
+<section class="contacts-section">
+
+  <!-- Левая колонка — контакты -->
+  <div class="contacts-left">
+    <h2 class="contacts-h2">Контакты</h2>
+
+    <div class="contacts-group">
+      <div class="contacts-label">График работы</div>
+      <div class="contacts-row">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        <span>Ежедневно&nbsp;&nbsp;10:00 – 22:00</span>
+      </div>
     </div>
-    <div class="location-item">
-      <span class="location-icon">◷</span>
-      <span>Режим работы: уточняйте при записи</span>
+
+    <div class="contacts-group">
+      <div class="contacts-label">Адрес</div>
+      <div class="contacts-row">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        <span>г. Москва, Большая Ордынка д.17, стр.1<br><span style="color:var(--muted);font-size:13px;">(от метро Третьяковская 2 мин пешком)</span></span>
+      </div>
     </div>
-    <div class="location-item">
-      <span class="location-icon">◈</span>
-      <span>+7 (968) 437-34-96 · esbeautyclinic.ru</span>
+
+    <div class="contacts-group">
+      <div class="contacts-label">Номер телефона</div>
+      <div class="contacts-row">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.09 3.18 2 2 0 012.05 1h3a2 2 0 012 1.72c.13.96.36 1.9.7 2.81a2 2 0 01-.45 2.11L6.09 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0122 16.92z"/></svg>
+        <a href="tel:+79691099977" class="contacts-link">+7 969 109 - 99 - 77</a>
+      </div>
     </div>
-    <div class="location-item">
-      <span class="location-icon">✓</span>
-      <span>Оплата картой, наличными, рассрочка, СБП</span>
-    </div>
-  </div>
-  <div class="location-right">
-    <div style="display:flex;flex-direction:column;gap:1rem;">
-      <iframe src="https://yandex.ru/sprav/widget/rating-badge/185962993902?type=award" width="150" height="50" frameborder="0" style="border:none;display:block;"></iframe>
-      <iframe src="https://yandex.ru/sprav/widget/rating-badge/185962993902?type=rating" width="150" height="50" frameborder="0" style="border:none;display:block;"></iframe>
-      <div class="location-rating">
-        <div class="location-rating-count" style="font-size:13px;color:var(--muted);">858 оценок</div>
+
+    <div class="contacts-group">
+      <div class="contacts-label">Почта и социальные сети</div>
+      <div class="contacts-row">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        <a href="mailto:esbeautyclinic@mail.ru" class="contacts-link">esbeautyclinic@mail.ru</a>
+      </div>
+      <div class="contacts-socials">
+        <a href="https://wa.me/79652099977" target="_blank" class="social-btn social-wa" title="WhatsApp">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12.031 0C5.385 0 .002 5.384.002 12.029c0 2.122.558 4.108 1.528 5.832L0 24l6.335-1.498a12.03 12.03 0 005.696 1.448h.001C18.678 23.95 24 18.566 24 11.921 24 5.275 18.678 0 12.031 0zm0 21.95h-.001a9.978 9.978 0 01-5.091-1.396l-.365-.217-3.763.889.952-3.652-.238-.376A9.947 9.947 0 012.053 12.03c0-5.504 4.478-9.981 9.979-9.981 5.5 0 9.978 4.477 9.978 9.981 0 5.503-4.479 9.919-9.979 9.919zm5.474-7.46c-.3-.15-1.772-.875-2.046-.974-.274-.1-.473-.15-.673.15-.199.299-.773.974-.947 1.173-.174.199-.349.224-.648.075-.3-.15-1.264-.466-2.408-1.485-.89-.793-1.491-1.772-1.666-2.072-.174-.3-.019-.462.131-.611.134-.134.3-.349.449-.523.15-.175.199-.3.3-.499.099-.2.05-.374-.025-.524-.075-.149-.673-1.621-.922-2.22-.242-.582-.488-.502-.673-.512-.174-.01-.373-.012-.572-.012-.2 0-.523.075-.797.374-.274.3-1.047 1.023-1.047 2.494s1.072 2.894 1.221 3.094c.149.199 2.108 3.217 5.107 4.511.713.308 1.27.491 1.703.629.716.228 1.368.196 1.883.119.574-.086 1.772-.724 2.022-1.423.249-.7.249-1.299.174-1.424-.075-.124-.274-.199-.573-.349z"/></svg>
+        </a>
+        <a href="https://t.me/es_beautyclinic" target="_blank" class="social-btn social-tg" title="Telegram">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12l-6.871 4.326-2.962-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.194 1.006.131.833.941z"/></svg>
+        </a>
+        <a href="https://www.instagram.com/es_beautyclinic" target="_blank" class="social-btn social-ig" title="Instagram">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162S8.597 18.163 12 18.163s6.162-2.759 6.162-6.162S15.403 5.838 12 5.838zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+        </a>
       </div>
     </div>
   </div>
+
+  <!-- Правая колонка — карта -->
+  <div class="contacts-map">
+    <iframe
+      src="https://yandex.ru/map-widget/v1/?ll=37.630249%2C55.737012&mode=search&oid=185962993902&ol=biz&z=16"
+      width="100%" height="100%"
+      frameborder="0"
+      allowfullscreen
+      style="border:none; display:block;"
+    ></iframe>
+  </div>
+
 </section>
 
 <!-- FOOTER CTA -->
@@ -1638,6 +1782,21 @@ function trackLead() {
     }
   }
 })();
+</script>
+
+<script>
+function toggleFaq(el) {
+  var item = el.parentElement;
+  var isOpen = item.classList.contains('open');
+  // Закрываем все
+  document.querySelectorAll('.faq-item.open').forEach(function(i) {
+    i.classList.remove('open');
+  });
+  // Открываем текущий если был закрыт
+  if (!isOpen) {
+    item.classList.add('open');
+  }
+}
 </script>
 
 </body>
