@@ -885,7 +885,7 @@ nav {
 <nav>
   <div class="nav-logo">ES Beauty Clinic</div>
   <div class="nav-phone">+7 (968) 437-34-96</div>
-  <a href="#offer" class="nav-cta">Записаться за 2 990 ₽</a>
+  <a href="#form" class="nav-cta">Записаться за 2 990 ₽</a>
 </nav>
 
 
@@ -920,7 +920,7 @@ nav {
         <div class="price-note">обычная цена</div>
       </div>
     </div>
-    <a href="#offer" class="btn-primary">Записаться и сэкономить 3 010 ₽</a>
+    <a href="#form" class="btn-primary">Записаться на пробный сеанс</a>
     <div class="hero-trust">
       <iframe src="https://yandex.ru/sprav/widget/rating-badge/185962993902?type=rating" width="150" height="50" frameborder="0" style="border:none;display:block;"></iframe>
       <div class="hero-trust-item">
@@ -1110,7 +1110,7 @@ nav {
       Именно поэтому мы делаем первый сеанс по специальной цене — чтобы у вас не было финансового риска. Только ваше время и доверие.
     </p>
   </div>
-  <div class="offer-right">
+  <div class="offer-right" id="form">
     <div class="offer-right-title">Пробный сеанс «Всё тело»</div>
     <div class="offer-price-big">2 990 ₽</div>
     <div class="offer-price-old">вместо 6 000 ₽</div>
@@ -1214,13 +1214,13 @@ nav {
 <section class="footer-cta">
   <h2 class="footer-cta-h2">Первый шаг — <em>пробный сеанс</em>.<br>Без обязательств.</h2>
   <p class="footer-cta-sub">2 990 ₽ вместо 6 000 ₽ · Всё тело · Без боли · м. Третьяковская</p>
-  <a href="#offer" class="btn-accent">Записаться и сэкономить 3 010 ₽</a>
+  <a href="#form" class="btn-accent">Записаться на пробный сеанс</a>
 </section>
 
 
 
 
-<a href="#offer" class="mobile-sticky-cta">Записаться за 2 990 ₽ →</a>
+<a href="#form" class="mobile-sticky-cta">Записаться за 2 990 ₽ →</a>
 
 <script>
 
@@ -1233,28 +1233,51 @@ nav {
   var input = document.getElementById('phone');
   if (!input) return;
 
-  function formatPhone(val) {
-    var digits = val.replace(/\D/g, '');
-    if (digits.startsWith('8')) digits = '7' + digits.slice(1);
-    if (digits.length > 0 && digits[0] !== '7') digits = '7' + digits;
-    digits = digits.slice(0, 11);
-    var result = '';
-    if (digits.length === 0) return '';
-    result = '+7';
-    if (digits.length > 1) result += ' (' + digits.slice(1, 4);
-    if (digits.length >= 4) result += ') ' + digits.slice(4, 7);
-    if (digits.length >= 7) result += '-' + digits.slice(7, 9);
-    if (digits.length >= 9) result += '-' + digits.slice(9, 11);
-    return result;
+  // Только цифры из строки, первая всегда 7
+  function getDigits(val) {
+    var d = val.replace(/\D/g, '');
+    if (d.length === 0) return '';
+    if (d[0] === '8') d = '7' + d.slice(1);
+    if (d[0] !== '7') d = '7' + d;
+    return d.slice(0, 11);
   }
 
+  function formatDigits(digits) {
+    if (!digits) return '';
+    var r = '+7';
+    if (digits.length > 1) r += ' (' + digits.slice(1, 4);
+    if (digits.length >= 4) r += ') ' + digits.slice(4, 7);
+    if (digits.length >= 7) r += '-' + digits.slice(7, 9);
+    if (digits.length >= 9) r += '-' + digits.slice(9, 11);
+    return r;
+  }
+
+  var isDeleting = false;
+
+  input.addEventListener('keydown', function(e) {
+    isDeleting = (e.key === 'Backspace' || e.key === 'Delete');
+  });
+
   input.addEventListener('input', function() {
-    var pos = input.selectionStart;
-    var oldLen = input.value.length;
-    input.value = formatPhone(input.value);
-    var newLen = input.value.length;
-    var newPos = pos + (newLen - oldLen);
-    input.setSelectionRange(newPos, newPos);
+    var digits = getDigits(input.value);
+
+    // При удалении — убираем последнюю цифру (кроме первой 7)
+    if (isDeleting && digits.length > 1) {
+      digits = digits.slice(0, -1);
+    }
+
+    var formatted = formatDigits(digits);
+
+    // Если поле почти пустое — очищаем
+    if (!digits || digits === '7') {
+      input.value = isDeleting ? '' : '+7 (';
+      return;
+    }
+
+    input.value = formatted;
+    // Курсор в конец
+    var len = formatted.length;
+    input.setSelectionRange(len, len);
   });
 
   input.addEventListener('focus', function() {
@@ -1262,7 +1285,8 @@ nav {
   });
 
   input.addEventListener('blur', function() {
-    if (input.value === '+7 (' || input.value === '+7') input.value = '';
+    var digits = getDigits(input.value);
+    if (!digits || digits === '7') input.value = '';
   });
 })();
 
