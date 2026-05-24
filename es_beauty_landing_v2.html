@@ -1306,5 +1306,162 @@ function trackLead() {
 }
 </script>
 
+<!-- EXIT INTENT POPUP -->
+<style>
+.exit-popup-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(44,36,32,0.55);
+  z-index: 1000;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+}
+.exit-popup-overlay.active { display: flex; }
+.exit-popup {
+  background: var(--cream);
+  max-width: 360px;
+  width: 100%;
+  padding: 2.5rem 2rem 2rem;
+  text-align: center;
+  position: relative;
+  animation: popup-in .25s ease;
+}
+@keyframes popup-in {
+  from { transform: scale(.92); opacity: 0; }
+  to   { transform: scale(1);   opacity: 1; }
+}
+.exit-popup-close {
+  position: absolute;
+  top: 1rem; right: 1rem;
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  color: var(--muted);
+  line-height: 1;
+}
+.exit-popup-label {
+  font-family: "Jost", sans-serif;
+  font-size: 11px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--accent-dark);
+  margin-bottom: 1rem;
+}
+.exit-popup-title {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 26px;
+  font-weight: 400;
+  color: var(--warm-dark);
+  line-height: 1.3;
+  margin-bottom: .5rem;
+}
+.exit-popup-timer {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 56px;
+  font-weight: 300;
+  color: var(--accent-dark);
+  line-height: 1;
+  margin: .75rem 0 1.5rem;
+  letter-spacing: .04em;
+}
+.exit-popup-btn {
+  display: block;
+  width: 100%;
+  padding: 15px;
+  background: var(--warm-dark);
+  color: var(--cream);
+  font-family: "Jost", sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  position: relative;
+  overflow: hidden;
+}
+.exit-popup-btn::after {
+  content: "";
+  position: absolute;
+  top: 0; left: -100%;
+  width: 60%; height: 100%;
+  background: linear-gradient(105deg, transparent 20%, rgba(255,255,255,0.18) 50%, transparent 80%);
+  animation: btn-shimmer 3s ease-in-out infinite;
+}
+.exit-popup-sub {
+  font-size: 12px;
+  color: var(--muted);
+  margin-top: .75rem;
+}
+</style>
+
+<div class="exit-popup-overlay" id="exitPopup">
+  <div class="exit-popup">
+    <button class="exit-popup-close" onclick="closeExitPopup()">&#x2715;</button>
+    <div class="exit-popup-label">Специальное предложение</div>
+    <div class="exit-popup-title">Скидка сгорит через</div>
+    <div class="exit-popup-timer" id="exitTimer">00:59</div>
+    <a href="#form" class="exit-popup-btn" onclick="closeExitPopup()">Записаться за 2 990 &#8381;</a>
+    <div class="exit-popup-sub">Пробный сеанс «Всё тело» &middot; вместо 6 000 &#8381;</div>
+  </div>
+</div>
+
+<script>
+(function() {
+  var popup = document.getElementById("exitPopup");
+  var timerEl = document.getElementById("exitTimer");
+  var shown = false;
+  var interval = null;
+  var seconds = 59;
+
+  function pad(n) { return n < 10 ? "0" + n : "" + n; }
+
+  function startTimer() {
+    seconds = 59;
+    timerEl.textContent = "00:" + pad(seconds);
+    interval = setInterval(function() {
+      seconds--;
+      timerEl.textContent = "00:" + pad(seconds);
+      if (seconds <= 0) { clearInterval(interval); }
+    }, 1000);
+  }
+
+  function showPopup() {
+    if (shown) return;
+    shown = true;
+    popup.classList.add("active");
+    startTimer();
+  }
+
+  window.closeExitPopup = function() {
+    popup.classList.remove("active");
+    clearInterval(interval);
+  };
+
+  // Десктоп: курсор уходит за верхний край
+  document.addEventListener("mouseleave", function(e) {
+    if (e.clientY < 10) showPopup();
+  });
+
+  // Мобилка: быстрый скролл вверх в начало страницы
+  var lastY = window.scrollY;
+  window.addEventListener("scroll", function() {
+    var cur = window.scrollY;
+    var delta = lastY - cur;
+    if (delta > 60 && cur < 300 && cur > 0) showPopup();
+    lastY = cur;
+  });
+
+  // Клик на фон закрывает
+  popup.addEventListener("click", function(e) {
+    if (e.target === popup) closeExitPopup();
+  });
+})();
+</script>
+
 </body>
 </html>
