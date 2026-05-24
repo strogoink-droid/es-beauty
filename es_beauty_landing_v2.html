@@ -1515,16 +1515,12 @@ function trackLead() {
     + '\ud83d\udcde Телефон: ' + phone + '\n'
     + '\ud83c\udf10 Источник: ' + window.location.href;
 
-  var NOTIFY_URL = 'https://notify.events/api/v1/channel/source/kwyfigobnvlk9o09apeqo8i-rnf40ti_/execute';
-  var msg = '<b>📩 Новая заявка!</b>\n'
-    + '👤 Имя: ' + (name || '—') + '\n'
-    + '📞 Телефон: ' + phone;
+  var content = encodeURIComponent('Имя: ' + (name || '—') + '\nТелефон: ' + phone);
+  var title = encodeURIComponent('📩 Новая заявка ES Beauty');
+  var NOTIFY_URL = 'https://notify.events/api/v1/channel/source/kwyfigobnvlk9o09apeqo8i-rnf40ti_/execute'
+    + '?title=' + title + '&content=' + content + '&priority=2';
 
-  fetch(NOTIFY_URL, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ title: 'Новая заявка ES Beauty', content: msg, priority: 1 })
-  })
+  fetch(NOTIFY_URL)
   .then(function() {
     btn.textContent = 'Заявка отправлена — перезвоним скоро';
     btn.style.background = '#0F6E56';
